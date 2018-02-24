@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Clientes</title>
+	<meta charset="utf-8">
+	<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Clientes</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="clientes.css">
+	<script src="clientes.js"></script>
+
+	
+</head>
+<body onload="buttons()">
+<div class=topnav>
+	<ol>
+		<a href="cliente.html"><li>Clientes</li></a>
+		<a href="cliente.html"><li>Proveedores</li></a>
+		<a href="cliente.html"><li>Facturas</li></a>
+		<a href="cliente.html"><li>Presupuestos</li></a>
+		<a href="cliente.html"><li>Productos</li></a>
+	</ol>
+</div>
+
+<div class="content">
+	<form id = "formulario">
+		
+		ID : <input type="number" name="id" id="id"><br/>
+		DNI : <input type="text" name="dni" id="dni"><br/>
+		NOMBRE : <input type="text" name="nombre" id = "nombre"><br/>
+		DIRECCIÓN : <input type="text" name="edad" id = "direccion"><br/>
+		EDAD : <input type="number" name="edad" id="edad"><br/>
+		RESIDENTE : <br> Sí <input type="radio" name="residente" id = "residente" value=""><br/>
+					No <input type="radio" name="residente" id = "noResidente"><br>
+
+
+	<input type="button" name="anadir" id="anadir" value="AÑADIR">
+	<input type="button" name="modificar" id="modificar" value="MODIFICAR">
+	<input type="button" name="eliminar" id="eliminar" value="ELIMINAR">
+	<input type="button" name="listar" id="listar" value="LISTAR">
+	<input type="button" name="guardar" id="guardar" value="GUARDAR"><br>
+	<input type="button" name="cargar" id="cargar" value="CARGAR">
+	<input type="button" name="limpiar" id="limpiar" value="LIMPIAR DE LOCALSTORAGE">
+	<input type="button" name="borrar" id="borrar" value="BORRAR LISTA">
+	</form>
+
+	<table border="1">
+		<caption>LISTA DE CLIENTES</caption>
+		<thead>
+		<th>ID</th>
+		<th>DNI</th>
+		<th>NOMBRE</th>
+		<th>DIRECCIÓN</th>
+		<th>EDAD</th>
+		<th>RESIDENTE</th>
+		</thead>
+		<tbody id="tabla"></tbody>
+
+	</table>
+	
+</div>
+
+</body>
+</html>
+
