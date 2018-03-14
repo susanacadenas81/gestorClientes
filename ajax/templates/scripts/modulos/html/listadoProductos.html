@@ -1,0 +1,13 @@
+LISTADO DE PRODUCTOS:<br/>
+<% for( i in productos ){ %>
+<div>
+
+Nombre: <%= productos[i].nombre %><br/>
+Teléfono: <%= productos[i].tel %><br/>
+Email: <%= productos[i].mail %><br/>
+Precio:<%= productos[i].precio %><br/>
+Descripcion:<%= productos[i].descripcion %><br/>
+	
+</div>
+
+<% } %>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir un archivo</title>
+</head>
+<body>
+    Selecciona un archivo: <br/>
+
+    <input type="file" name="campoArchivo" id="campoArchivo"><br/>
+    <button id="subirArchivo">Subir archivo</button>
+
+<script src="jquery.js"></script>
+
+<script>
+
+    var archivosSeleccionados;
+
+    $("#campoArchivo").change(function(evento){
+        archivosSeleccionados = evento.target.files;
+        alert("Se ha seleccionado" + archivosSeleccionados[0]);
+    });
+
+    $("#subirArchivo").click(function(){
+        //Objeto muy util para mandar informacion y archivos por ajax
+
+        var data = new FormData();
+
+        for(i=0;i<archivosSeleccionados.length;i++){
+            data.append("archivo", archivosSeleccionados[i],archivosSeleccionados[i].name);
+        }
+        //Mando data por ajax al servidor
+
+        $.ajax({
+            type: "POST",
+            url: "servidor.php",
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+              alert("archivo subido corectamente: "+res);
+            },
+            error: function(err){
+                  alert("error al subir el archivo res:"+err);
+                console.log(err);
+                
+            }, 
+        });
+
+    });
+
+
+</script>
+
+</body>
+</html>

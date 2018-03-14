@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aplicacion de registro</title>
+</head>
+<meta charset="UTF-8">
+<body>
+<div id="contenedor" name="contenedor">
+Introduce tus datos para apuntarte al curso:
+<form onsubmit="return procesarRegistro()" id="formRegistro">
+	
+	Nombre y apellidos: <input type="text" id="campoNombre" name="campoNombre"/><br/>
+	Dirección: <input type="text" id="campoDireccion" name="campoDireccion"/><br/>
+	Poblacion: <input type="text" id="campoPoblacion" name="campoPoblacion"/><br/>
+	Teléfono: <input type="text" id="campoTelefono" name="campoTelefono"/><br/>
+	Email:<input type="mail" name="campoEmail" id="campoEmail"/><br/>
+	Fecha de nacimiento: <input type="date" id="campoFecha" name="campoFecha"/><br/>
+	<input type="submit" value="APUNTARME"/>
+</form>
+<div id="listadoapuntados"></div>
+</div>
+<script type="text/javascript" src="miscript.js"></script>
+</body>
+</html>

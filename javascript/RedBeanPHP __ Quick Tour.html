@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://redbeanphp.com/index.php?p=/quick_tour -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>RedBeanPHP :: Quick Tour</title>
+	
+	<meta name="author" content="Gabor de Mooij">
+	<meta name="google-site-verification" content="CGmZGF9HRybgk4Hz-IfpVoFbZNP8XNb7iJv37VQD9g0">
+	<link rel="alternate" title="rss" type="application/rss+xml" href="https://github.com/gabordemooij.atom">
+	<link rel="icon" type="image/gif" href="https://redbeanphp.com/favicon.gif">
+	<link href="./RedBeanPHP __ Quick Tour_files/css" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,user-scalable=no">
+	<link rel="stylesheet" type="text/css" media="all" href="./RedBeanPHP __ Quick Tour_files/neat2.css">
+	<link rel="stylesheet" href="./RedBeanPHP __ Quick Tour_files/font-awesome.min.css">
+		<link rel="preload" href="./RedBeanPHP __ Quick Tour_files/integrator.js.descarga" as="script"><script async="" src="./RedBeanPHP __ Quick Tour_files/analytics.js.descarga"></script><script src="./RedBeanPHP __ Quick Tour_files/ca-pub-6669198173715938.js.descarga"></script><script type="text/javascript" src="./RedBeanPHP __ Quick Tour_files/integrator.js.descarga"></script><link rel="preload" href="./RedBeanPHP __ Quick Tour_files/integrator.js(1).descarga" as="script"><script type="text/javascript" src="./RedBeanPHP __ Quick Tour_files/integrator.js(1).descarga"></script></head>
+	<body><div class="cookie-bar">	<p class="cookie-bar-description"><img alt="" style="opacity:0.6;width:20px" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjAwJyBoZWlnaHQ9JzIwMCcgZmlsbD0iIzAwMDAwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik00OS42NjYsOTIuNDM1Yy0yMi42NTYsMC00MS4wOTEtMTguNDMtNDEuMDkxLTQxLjA4NmMwLTIyLjY0OCwxOC40MzUtNDEuMDgyLDQxLjA5MS00MS4wODggICBjMS41OTQsMCwzLjI3NCwwLjExOSw1LjI4MywwLjM3M2wzLjA4NSwwLjM5MWwtMC40NSwzLjA3OGMtMC4wODcsMC41ODYtMC4xNTcsMC45OTQtMC4xNTcsMS40MjJjMCw1LjI3LDQuMjg4LDkuNTU3LDkuNTU4LDkuNTU3ICAgYzAuODc5LDAsMS44MTktMC4xNjQsMi44NzktMC41MDRsMy4xNDQtMS4wMTJsMC43NTYsMy4yMTdjMC42MTksMi42MjksMi4zNjUsNC44NzksNC43OTUsNi4xODJsMS44NDUsMC45ODhsLTAuMzA5LDIuNDU3ICAgYy0wLjAzNCwwLjI2LTAuMDgsMC41MTYtMC4wOCwwLjc3OWMwLDQuNzExLDMuMzk0LDguNjYsOC4wNzEsOS4zOThsMi40NTksMC4zOTFsMC4xNDgsMy4wNTNjMC4wMjksMC40MzgsMC4wNTgsMC44NzMsMC4wNTgsMS4zMTggICBDOTAuNzUsNzQuMDA1LDcyLjMxOSw5Mi40MzUsNDkuNjY2LDkyLjQzNXogTTQ5LjY2NiwxNi4zNjJjLTE5LjI5MywwLjAwNC0zNC45ODksMTUuNjk5LTM0Ljk4OSwzNC45ODYgICBjMCwxOS4yOTEsMTUuNjk0LDM0Ljk4NiwzNC45ODksMzQuOTg2YzE5LjA2OSwwLDM0LjYyNC0xNS4zMzYsMzQuOTc5LTM0LjMyYy02LjMyOS0yLjA3NC0xMC43MDYtNy45MzItMTAuNzMxLTE0Ljc3MyAgIGMtMi4yMTktMS41OTQtMy45NzctMy43MjktNS4xMDEtNi4xODZjLTAuNjE4LDAuMDg0LTEuMjI2LDAuMTI3LTEuODI4LDAuMTI3Yy04LjMzNiwwLTE1LjE3LTYuNTQ5LTE1LjYzMS0xNC43NyAgIEM1MC43NjIsMTYuMzc4LDUwLjIwNSwxNi4zNjIsNDkuNjY2LDE2LjM2MnoiLz48L2c+PGc+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTUxLjEzLDY2LjYwMWMxLjg2NywyLjY2LDQuNDIsNC42OTUsNy40NzgsNS44MDVjMS4wODIsMC4zOTUsMi43MzktMC4wMTYsMy40Ny0wLjkyICAgYzEuNTEtMS44NSwyLjc2Ni0zLjc1NCwzLjAxNC02LjE4NmMwLjIyOS0yLjI2LTEuMTIxLTQuNDU3LTMuMTIzLTUuNDU5Yy0xLjI3LTAuNjMxLTIuNTY2LTAuODM2LTMuOTcxLTAuOTUzICAgYy0xLjQ1NC0wLjEyMS0yLjQ4MywwLjMzOC0zLjYwMSwxLjIyN2MtMC45MDQsMC43MjUtMS44MDgsMS40NDEtMi43MTIsMi4xNjhjLTEuNTIxLDEuMjIxLTEuMjYzLDMuNzgzLDAsNS4wNDMgICBjMS40ODYsMS40OSwzLjUyNywxLjIxNSw1LjA0MywwYzAuOTk2LTAuNzg3LDEuOTc4LTEuNTg0LDIuOTcxLTIuMzc5Yy0wLjg0LDAuMzU0LTEuNjgxLDAuNjk3LTIuNTIxLDEuMDQ3ICAgYzAuNDAxLDAuMDA2LDAuNzk5LDAuMDIxLDEuMjAxLDAuMDU1Yy0wLjY5NC0wLjA1NSwwLjQ0MiwwLjE2MiwwLjU5NiwwLjIwN2MtMC44ODktMC4yOTMsMC4yNDQsMC4zODMtMC41NTUtMC4zMDcgICBjMC4yNTMsMC4yNzksMC4xODksMC4xODktMC4xODktMC4yNWMtMC4yMDYtMC41NTktMC4yNjEtMC42NTgtMC4xNi0wLjI5OWMtMC4yNDYtMC45ODYtMC4xODUsMC4xMTctMC4wMjUtMC44MiAgIGMtMC4wMzYsMC4yMTctMC40NTQsMS4xNzgtMC4wODQsMC4zODNjLTAuMTI4LDAuMjc1LTAuMjkyLDAuNTMxLTAuNDUsMC43OTljLTAuMTE2LDAuMTg4LTAuMjQ0LDAuMzY5LTAuMzY5LDAuNTUxICAgYzAuMjA1LTAuMjUyLDAuMTczLTAuMjA5LTAuMTA1LDAuMTMzYzEuMTU3LTAuMzA5LDIuMzA5LTAuNjEzLDMuNDY2LTAuOTE2Yy0wLjk3My0wLjM1NCwwLjYxNCwwLjMyOC0wLjQwMS0wLjIwMSAgIGMtMC40NjQtMC4yMzgtMC44OTQtMC41MzktMS4zMTUtMC44MzZjMC4xODEsMC4xNTIsMC4xMDQsMC4wODItMC4yMzctMC4yMDFjLTAuMjAxLTAuMTc0LTAuMzk2LTAuMzU0LTAuNTk0LTAuNTUxICAgYy0wLjEyMS0wLjExMy0wLjkxOC0xLjA4Ni0wLjY2NC0wLjczMmMtMS4xMjEtMS41OTItMy4wOTktMi4zMjYtNC44ODItMS4yODFDNTAuODM1LDYyLjY0Nyw1MC4wMDQsNjUuMDA5LDUxLjEzLDY2LjYwMXoiLz48L2c+PGc+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTYwLjgxNCw0Mi41NzljMi4yNTIsMS43NjIsMy43MDYsNC4xNDMsNS4zODcsNi40MTJjMS42MjMtMS42MjUsMy4yNTEtMy4yNTgsNC44NzQtNC44NzcgICBjLTIuMTk0LTEuNTUzLTQuNzYzLTEuODYzLTcuMTMtMi45NzNjMC41NDgsMS4zNDIsMS4wOTQsMi42ODIsMS42NDQsNC4wMmMwLjM5My0xLjM4MSwwLjc4OC0yLjc2NiwxLjE4My00LjE1OCAgIGMxLjI3LTQuNDMtNS42MTQtNi4zMTItNi44NzctMS44OTZjLTAuMzk3LDEuMzg3LTAuNzkyLDIuNzc1LTEuMTg5LDQuMTY2Yy0wLjQwNCwxLjQyOCwwLjIyMiwzLjM1NSwxLjY0LDQuMDIxICAgYzIuMzQ3LDEuMTAyLDUuMDA1LDEuNDY5LDcuMTM3LDIuOTczYzIuODUyLDIuMDEsNi45OTMtMi4wMjcsNC44NzMtNC44NzljLTIuMDA1LTIuNzE1LTMuNzk4LTUuNzQ2LTYuNDk0LTcuODU1ICAgYy0xLjUyOS0xLjE5NS0zLjU1LTEuNDk4LTUuMDQxLDBDNTkuNTY4LDM4Ljc4NCw1OS4yNzYsNDEuMzc2LDYwLjgxNCw0Mi41Nzl6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0zNi4zNDYsNjguMTI0YzAsMC42NTQtMC4wMDcsMS4zMDctMC4wNDYsMS45NjNjLTAuMDM4LDAuNDM5LTAuMDM4LDAuNDU1LTAuMDAyLDAuMDM3ICAgYy0wLjAyMiwwLjExMS0wLjM3LDEuMDM5LTAuMDYsMC4zNjdjMS4wMjUtMC41OTQsMi4wNTMtMS4xOCwzLjA4My0xLjc3MWMtMC4yOTMtMC4wMDQtMC41NzYtMC4wMTQtMC44Ny0wLjAzNyAgIGMwLjk4MSwwLjA3OC0wLjAzMi0wLjA0OS0wLjI3MS0wLjEyMWMwLjg2NywwLjI2NiwwLjMyMSwwLjE0OCwwLjA2Mi0wLjAwNGMtMC4zMTEtMC4yMTMtMC4yMzMtMC4xNTgsMC4yMjksMC4xNzYgICBjLTAuMjUyLTAuMjcxLTAuMjAxLTAuMTg2LDAuMTQ4LDAuMjU0Yy0wLjEyNi0wLjE2OC0wLjIyNy0wLjM2My0wLjMyNy0wLjU1NWMwLjQ3MSwwLjkxMiwwLjAzNy0wLjAxNi0wLjAzOS0wLjI4OSAgIGMtMC4wMzYtMC4xOC0wLjA3Mi0wLjM1NC0wLjEtMC41MjdjMC4wNTksMC40NzEsMC4wNjUsMC40OTIsMC4wMjIsMC4wNjJjLTAuMDQzLTAuNDQzLTAuMDQzLTAuODkzLTAuMDQ4LTEuMzMyICAgYy0xLjUwNSwxLjE0Ni0zLjAxLDIuMjg5LTQuNTEyLDMuNDM4YzEuNzgxLDAuNTkyLDMuNTY0LDEuMTg5LDUuMzQ4LDEuNzgxYzEuODQ3LDAuNjE3LDMuODkzLTAuNjkzLDQuMzg2LTIuNDkgICBjMC41MzYtMS45NDUtMC42NDQtMy43Ny0yLjQ4OS00LjM4M2MtMS43OC0wLjU5Ni0zLjU2My0xLjE4OS01LjM0Ny0xLjc4NWMtMi4yMDgtMC43MzItNC41MzIsMS4yMDktNC41MTQsMy40MzkgICBjMC4wMjEsMi4xNDMsMC4yMzIsNC42NDMsMS41OTQsNi40MTJjMS42OTEsMi4xOTcsMy45ODMsMy4wNTcsNi43MjksMy4wOThjMS4xNTUsMC4wMTYsMi41NzUtMC42NywzLjA3My0xLjc3MSAgIGMwLjg5NS0xLjkzOCwxLjA4Mi0zLjg0MiwxLjA4Ni01Ljk1N0M0My40OCw2My41MjYsMzYuMzUxLDYzLjUyNiwzNi4zNDYsNjguMTI0eiIvPjwvZz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMzMuNjg4LDQ1LjU0NGMtMC4wODIsMC42MjEsMC45MTMtMS45OCwwLjY3OC0xLjMwOWMwLjI0Ny0wLjcwMywwLjMwOS0xLjQsMC40MDktMi4xMzUgICBjMC4yMTItMS42MDctMS4yNTktMi45ODQtMi42MTktMy40NDFjLTAuNzgtMC4yNi0xLjYwNy0wLjI4Ny0yLjM5MS0wLjU0NWMtMS40MzQtMC40NzktMy4zNDMsMC4yNzctNC4wMjUsMS42MzkgICBjLTIuMDA5LDMuOTktNS41OTEsMTAuMTU0LTMuMjE0LDE0LjcxMWMxLjg3MiwzLjU4NCw2LjQyLDIuNTE2LDkuMTgsMC44NjdjMi42MzEtMS41NjQsNS45ODItNC4zOTUsNC4yNzktNy43OTkgICBjLTIuMjkyLTQuNTg4LTkuMTA3LDAuMTcyLTExLjcxMywxLjczNGMxLjc4MywxLjAyNSwzLjU3NSwyLjA1Myw1LjM2MSwzLjA3OGMwLjAzOC0xLjE1OCwwLjQ4My0yLjIyNywwLjYyMS0zLjM5NSAgIGMwLjIyOC0xLjk1My0xLjU0OS0zLjgwMy0yLjY2NS01LjE1NGMwLjM1LDAuODM4LDAuNjk5LDEuNjgyLDEuMDQ2LDIuNTJjLTAuMDk2LDAuMjA5LTAuMTg4LDAuNDE2LTAuMjgzLDAuNjIxICAgYy0wLjcxMiwwLjU0NS0xLjQyLDEuMDg4LTIuMTMsMS42MzljLTAuNzIyLDAuMjk3LTAuMTc2LDAuMDE2LDAuMjUzLTAuMDAyYzAuOTM4LTAuMDQzLDEuNzA2LTAuMzI4LDIuNTMyLTAuNzY2ICAgYy0wLjkxOCwwLjEyMS0xLjgzMywwLjI0NC0yLjc0OSwwLjM2MWMwLjk3MywwLjI3MSwxLjk0MywwLjU0MywyLjkxOCwwLjgxNGM0LjQzNywxLjI0LDYuMzE3LTUuNjM5LDEuODkzLTYuODc3ICAgYy0wLjk3My0wLjI3MS0xLjk0NS0wLjU0My0yLjkxOC0wLjgxNGMtMC42MzItMC4xNzItMS4yNjMtMC4xNzItMS44OTUsMGMtMi43NzIsMC43NiwwLjkwNCwwLjE3NC0wLjQ2NiwwLjE2ICAgYy0xLjUxOS0wLjAyLTIuNzA2LDAuNjg5LTMuNTk3LDEuODc5Yy0wLjYzNCwwLjg1LTAuNzQxLDEuOTYzLTAuNjkzLDIuOTg0YzAuMDc1LDEuNTI1LDEuMDA0LDIuMzI2LDEuNzg3LDMuNTA0ICAgYy0wLjM5Ni0wLjYsMC4wOTctMi4xLTAuMzU0LTAuNzA5Yy0wLjMzOCwxLjAyNy0wLjQwMiwyLjE2OC0wLjQzOCwzLjIzNGMtMC4wODksMi43MDUsMy4wOTYsNC40NDcsNS4zNjEsMy4wODQgICBjMS40NjMtMC44NzEsMi45MjktMS43MzIsNC40NjYtMi40NjNjMC44NTUtMC40LTAuNTQ0LDAuMTQ1LDAuNTg5LTAuMjE3YzAuMzUtMC4xMTEsMS4wMDItMC4xMzctMC4zOTksMC4wMTggICBjLTEuNDAyLDAuMTQzLTMuMDgtMS42OC0zLjE2Ny0zLjM0NmMtMC4wMTktMC4zNjMsMC4zNDUtMS40MTQsMC4zODgtMS41MDZjLTAuMTM0LDAuMjY0LTAuNTUyLDAuNzI1LDAuMjk1LTAuMzQyICAgYy0wLjIxMiwwLjI2OC0wLjQ1NCwwLjUtMC43MDUsMC43MzJjLTAuMTEsMC4xMDItMC4yMjIsMC4xOTctMC4zMzgsMC4yOTFjLTAuNjY3LDAuNTYxLDAuNTgyLTAuNDM2LDAuMDk0LTAuMDY2ICAgYy0wLjM1OSwwLjI2Ni0wLjczOCwwLjUwOC0xLjEyNCwwLjc0NGMtMC4zMzMsMC4xOTMtMC42NzgsMC4zNjktMS4wMjksMC41MzFjMS4xODktMC41NDMtMC4wNDgtMC4wMi0wLjQyNywwLjA1NSAgIGMxLjE0OC0wLjIyOSwwLjc2NS0wLjA4MiwwLjQzNC0wLjA3Yy0wLjc2NSwwLjAyNSwwLjg3LDAuMTgsMC4zNzIsMC4wNDljMS4wMjcsMC4yNzcsMS4zNDcsMC44NDgsMS41ODIsMS41MzMgICBjLTAuMDk2LTAuMjc1LTAuMTA3LTAuODQ4LDAuMDE2LDAuMzM4Yy0wLjAyNy0wLjI2LTAuMDExLTAuNTE4LDAuMDA1LTAuNzczYzAuMDM3LTAuNTMzLTAuMTU1LDAuNzczLDAuMDY0LTAuMjczICAgYzAuMDg0LTAuNCwwLjE5My0wLjc5NywwLjMxNC0xLjE5NWMwLjYyNi0yLjEzMSwxLjYxNC00LjEzMywyLjYwNy02LjEwOWMtMS4zNDMsMC41NTEtMi42ODUsMS4wOTQtNC4wMjcsMS42MzkgICBjMC43ODMsMC4yNjIsMS42MDcsMC4yODUsMi4zODksMC41NDdjLTAuODczLTEuMTQ2LTEuNzQ3LTIuMjkzLTIuNjE3LTMuNDM5YzAuMDgyLTAuNjIxLTAuOTExLDEuOTgyLTAuNjczLDEuMzExICAgYy0wLjI0OSwwLjcwMy0wLjMxNSwxLjQtMC40MDksMi4xMzdjLTAuMjU0LDEuOTMsMS44MTcsMy41NjQsMy41NjQsMy41NjRDMzIuMjU5LDQ5LjExMiwzMy40MzMsNDcuNDcsMzMuNjg4LDQ1LjU0NHoiLz48L2c+PGc+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTQxLjc5Niw0NS45MzFjMS41OCwxLjUyMywzLjY0OCwyLjY4Miw1LjkxMSwyLjU4NmMyLjA1NS0wLjA5Miw0LjE4OS0xLjE2Miw1LjEzNy0zLjA2NCAgIGMxLjA4Ny0yLjE3NCwwLjY5LTQuNDg4LTAuOTM2LTYuMjdjLTEuNzAzLTEuODc1LTQuNjIxLTIuMjgzLTYuOTkzLTIuMzExYy0xLjUtMC4wMjEtMy4xMzUsMS4wOTItMy40NDMsMi42MTUgICBjLTAuMTk2LDAuOTktMC4zOTUsMS45OC0wLjU5NiwyLjk3MWMtMC4zNzksMS45MDYsMC41MjEsMy44NDQsMi40OTUsNC4zODljMS43NywwLjQ4Niw0LjAwMy0wLjU4Miw0LjM4Ni0yLjQ5MiAgIGMwLjE5Ny0wLjk5LDAuMzk3LTEuOTgsMC41OTctMi45NzNjLTEuMTUxLDAuODczLTIuMjkzLDEuNzQ4LTMuNDM4LDIuNjE1YzAuMzM4LDAuMDA2LDAuNjY0LDAuMDIsMS4wMDQsMC4wMzkgICBjMC40MywwLjA0NywwLjQwNywwLjAzNS0wLjA3LTAuMDIzYzAuMTc2LDAuMDI1LDAuMzUsMC4wNTksMC41MTksMC4xMDJjMC4yNDgsMC4wNTMsMS4yNzMsMC40MzQsMC4yMjQtMC4wMTIgICBjMC4yMjQsMC4wOTYsMC40MzYsMC4yMjksMC42MzksMC4zNjdjLTAuODQtMC41NzItMC40NzctMC4zNzctMC4yNjUtMC4xMzljLTAuMzk3LTAuNTU1LTAuNTA1LTAuNjg0LTAuMzI4LTAuMzg5ICAgYy0wLjI0Ny0wLjY2Mi0wLjMyMi0wLjgyOC0wLjIxMS0wLjVjMC4xNjcsMC41MDgtMC4wMzEtMS4xMDctMC4wNy0wLjM2MWMwLjEyOC0wLjc0NiwwLjE1LTAuOTQ5LDAuMDU1LTAuNjA1ICAgYy0wLjExMiwwLjMzLTAuMDM2LDAuMTU4LDAuMjI3LTAuNTJjLTAuMTM4LDAuMjY4LTAuNTA3LDAuNTc4LDAuMjczLTAuMzI2Yy0wLjUsMC41OCwwLjY3NC0wLjQ0NSwwLjIyMi0wLjE0OCAgIGMtMC42NjksMC40MzgsMC43NTMtMC4yNTIsMC4yMTktMC4wOGMtMC44MDgsMC4yNTYsMC44LTAuMDQ1LDAuMjAzLTAuMDE2Yy0wLjI5LDAuMDEyLTAuODc2LTAuMTE3LDAuMjg4LDAuMDY2ICAgYy0wLjI3MS0wLjA0Ny0xLjA4Mi0wLjM2MS0wLjAzNiwwLjA3OGMtMC4yNTktMC4xMTMtMC41MDMtMC4yNjItMC43NC0wLjQxNGMtMC4zMDYtMC4yMTktMC4yNTMtMC4xOCwwLjE1NSwwLjExNyAgIGMtMC4xMjgtMC4xMTMtMC4yNTYtMC4yMjktMC4zODQtMC4zNTJjLTEuMzk1LTEuMzQ4LTMuNjQ4LTEuMzk1LTUuMDQxLDBDNDAuNDM4LDQyLjI0Myw0MC4zOTgsNDQuNTgzLDQxLjc5Niw0NS45MzF6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik03Ni4wMTIsMTQuNzAyYzQuNjAxLDAsNC42MDEtNy4xMzcsMC03LjEzN0M3MS40MTMsNy41NjUsNzEuNDEzLDE0LjcwMiw3Ni4wMTIsMTQuNzAyTDc2LjAxMiwxNC43MDJ6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik04NC4zMzQsMjQuOTk5YzQuNTk5LDAsNC41OTktNy4xMzEsMC03LjEzMUM3OS43MzMsMTcuODY4LDc5LjczMywyNC45OTksODQuMzM0LDI0Ljk5OUw4NC4zMzQsMjQuOTk5eiIvPjwvZz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODkuNDg3LDQyLjQ1NmMyLjU4NCwwLDIuNTg0LTQuMDA0LDAtNC4wMDRDODYuOTAyLDM4LjQ1Miw4Ni45MDIsNDIuNDU2LDg5LjQ4Nyw0Mi40NTZMODkuNDg3LDQyLjQ1NnoiLz48L2c+PC9zdmc+"> We use cookies to improve your experience on our websites. By continuing your visit, you accept our use of these cookies. </p>
+	<div class="cookie-bar-action">
+		<a class="cookie-bar-button" href="https://redbeanphp.com/index.php?p=/quick_tour#">OK</a>&nbsp;&nbsp;
+	</div>
+</div>
+
+
+
+		<div class="wrapper">
+			<div class="top">
+				<a style="border-width:0px;" id="bean" href="https://redbeanphp.com/" rel="home"><img class="logo" src="./RedBeanPHP __ Quick Tour_files/redbeanphp_logo.png" alt="RedBeanPHP logo, a white bean on a red square." title="Easy ORM for PHP"></a>
+				<h1>RedBeanPHP<br><span>The Power ORM</span>
+				</h1>
+				<ul>
+					<li><a title="Contribute to RedBeanPHP or fork the repository on Github." target="_blank" href="http://github.com/gabordemooij/redbean"><i class="fa fa-git"></i></a></li>
+					<li><a title="Read the latest test report on Travis-CI." target="_blank" href="http://travis-ci.org/gabordemooij/redbean">Travis</a></li>
+					<li><a title="Discover hidden treasures in RedBeanPHP ORM with the API documentation." target="_blank" href="https://redbeanphp.com/api5/namespaces/RedBeanPHP.html">API</a></li>
+					<li><a title="Ask questions or help others at the RedBeanPHP forum." target="_blank" href="http://groups.google.com/forum/?fromgroups#!forum/redbeanorm">Forum</a></li>
+					<li><a title="Commercial Support Contracts" href="https://redbeanphp.com/index.php?p=/premium">Premium</a></li>
+					<li><a title="RedBeanPHP Shop" href="https://redbeanphp.com/index.php?p=/shop"><i class="fa fa-shopping-bag"></i></a></li>
+					<!-- <li><a title="The previous manual site for RedBeanPHP 3." href="/manual3_0/">Version 3</a></li> -->
+				</ul>
+			</div>
+			<div class="manual">
+				<div class="index">
+					<ul class="topics"><li><b class="cat">Introduction</b><ul><li><a title="Welcome" href="https://redbeanphp.com/welcome">Welcome</a></li><li><span class="current" title="You are on this page">Quick Tour</span></li><li><a title="Requirements" href="https://redbeanphp.com/requirements">Requirements</a></li><li><a title="Download" href="https://redbeanphp.com/download">Download</a></li><li><a title="Install" href="https://redbeanphp.com/install">Install</a></li><li><a title="Connection" href="https://redbeanphp.com/connection">Connection</a></li><li><a title="Tutorial" href="https://redbeanphp.com/tutorial">Tutorial</a></li><li><a title="Videos" href="https://redbeanphp.com/videos">Videos</a></li></ul></li><li><b class="cat">Basics</b><ul><li><a title="CRUD" href="https://redbeanphp.com/crud">CRUD</a></li><li><a title="Finding" href="https://redbeanphp.com/finding">Finding</a></li><li><a title="Querying" href="https://redbeanphp.com/querying">Querying</a></li><li><a title="Data Tools" href="https://redbeanphp.com/data_tools">Data Tools</a></li><li><a title="Database" href="https://redbeanphp.com/database">Database</a></li><li><a title="Fluid and Frozen" href="https://redbeanphp.com/fluid_and_frozen">Fluid and Frozen</a></li><li><a title="Debugging" href="https://redbeanphp.com/debugging">Debugging</a></li></ul></li><li><b class="cat">Relations</b><ul><li><a title="One-to-many" href="https://redbeanphp.com/one_to_many">One-to-many</a></li><li><a title="Many-to-one" href="https://redbeanphp.com/many_to_one">Many-to-one</a></li><li><a title="Aliases" href="https://redbeanphp.com/aliases">Aliases</a></li><li><a title="Many-to-many" href="https://redbeanphp.com/many_to_many">Many-to-many</a></li><li><a title="Using SQL Snippets" href="https://redbeanphp.com/using_sql_snippets">Using SQL Snippets</a></li><li><a title="Counting" href="https://redbeanphp.com/counting">Counting</a></li><li><a title="Labels, Enums, Tags" href="https://redbeanphp.com/labels__enums__tags">Labels, Enums, Tags</a></li></ul></li><li><b class="cat">Advanced</b><ul><li><a title="Trees" href="https://redbeanphp.com/trees">Trees</a></li><li><a title="Link Beans" href="https://redbeanphp.com/link_beans">Link Beans</a></li><li><a title="Other relations" href="https://redbeanphp.com/other_relations">Other relations</a></li><li><a title="Models" href="https://redbeanphp.com/models">Models</a></li><li><a title="Meta data" href="https://redbeanphp.com/meta_data">Meta data</a></li><li><a title="Duplicate" href="https://redbeanphp.com/duplicate">Duplicate</a></li><li><a title="Import and Export" href="https://redbeanphp.com/import_and_export">Import and Export</a></li><li><a title="Non-static" href="https://redbeanphp.com/non_static">Non-static</a></li><li><a title="UUIDs" href="https://redbeanphp.com/uuids">UUIDs</a></li><li><a title="Prefixes" href="https://redbeanphp.com/prefixes">Prefixes</a></li><li><a title="Query Builder" href="https://redbeanphp.com/query_builder">Query Builder</a></li><li><a title="LOBs" href="https://redbeanphp.com/lobs">LOBs</a></li><li><a title="Migrations" href="https://redbeanphp.com/migrations">Migrations</a></li></ul></li><li><b class="cat">Project</b><ul><li><a title="Changelog" href="https://redbeanphp.com/changelog">Changelog</a></li><li><a title="Roadmap" href="https://redbeanphp.com/roadmap">Roadmap</a></li><li><a title="About" href="https://redbeanphp.com/about">About</a></li><li><a title="Plugins" href="https://redbeanphp.com/plugins">Plugins</a></li><li><a title="Github" href="https://redbeanphp.com/github">Github</a></li><li><a title="Travis" href="https://redbeanphp.com/travis">Travis</a></li><li><a title="API" href="https://redbeanphp.com/api">API</a></li><li><a title="Forum" href="https://redbeanphp.com/forum">Forum</a></li></ul></li><li><b>More</b><ul>
+	
+<li>
+<form action="https://www.google.com/" id="cse-search-box" target="_blank">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-6669198173715938:2156804720">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="55" placeholder="Custom Search" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://www.google.com/cse/static/images/1x/googlelogo_lightgrey_46x16dp.png&quot;) left center no-repeat rgb(255, 255, 255); text-indent: 48px;">
+    <input type="submit" name="sa" value="Search">
+  </div>
+<input name="siteurl" type="hidden" value="redbeanphp.com/index.php?p=/quick_tour"><input name="ref" type="hidden" value="redbeanphp.com/index.php?p=/download"><input name="ss" type="hidden" value=""></form>
+
+<script type="text/javascript" src="./RedBeanPHP __ Quick Tour_files/brand"></script>
+
+</li>
+<!-- <li><a href="https://cse.google.com/cse/publicurl?cx=015253079453650145859:udli2q76ngi" target="_blank"><i class="fa fa-search"></i> search</a></li> -->
+	<li><a href="https://redbeanphp.com/index.php?p=/premium" title="Commercial Support">Premium</a></li>
+	<li><a href="https://redbeanphp.com/index.php?p=/shop">Shop</a></li>
+	
+	</ul>
+	</li></ul>
+				</div>
+				<div class="content">
+					<div class="inlay"><h1>Quick Tour</h1>
+
+
+<p>
+In this <b>Quick Tour</b> we will show you
+how to use <b>RedBeanPHP</b> and highlight some of its features.
+<br>
+Because your time is precious, the Quick Tour is very brief and should only take about
+<b>5 minutes</b> to walk through...
+</p> 
+
+<h2>Quick Tour in 10 seconds</h2>
+<p>
+	Have an associative array in PHP? You can store an entire
+	array structure (even from a form) in one line:
+</p>
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;R</span><span style="color: #007700">::</span><span style="color: #0000BB">store</span><span style="color: #007700">(</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">dispense</span><span style="color: #007700">([<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'_type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'book'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'title'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'My&nbsp;Book'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'ownPageList'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[</span><span style="color: #DD0000">'_type'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'page'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'name'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'first&nbsp;page'</span><span style="color: #007700">]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>&nbsp;&nbsp;&nbsp;&nbsp;]));<br><br></span><span style="color: #0000BB"></span>
+</span>
+</code></div><p>
+	This creates a book table with one entry called 'My Book' and a related page
+	(using proper foreign keys). ...8...9...10. :)
+</p>
+
+<h2>Quick Tour in 5 minutes</h2>
+
+<p>
+<b>RedBeanPHP</b> focuses on the <b>developer</b>,... <b>you</b>!<br>
+It does not focus primarily on <i>performance</i>, 
+<i>object orientedness</i>,
+<i>correctness</i> or <i>proper design</i>.<br>
+<b>No</b>, RedBeanPHP's purpose is to <b>boost</b> your <b>productivity</b>.<br>
+As such, RedBeanPHP is not just an <b>ORM</b>, it's also a <b>development tool</b>.
+</p>
+
+
+<div style="max-width:800px;width:100%;margin-top:10px;margin-bottom:20px"><script async="" src="./RedBeanPHP __ Quick Tour_files/adsbygoogle.js.descarga"></script>
+<ins class="adsbygoogle" style="display: block; text-align: center; height: 186px;" data-ad-format="fluid" data-ad-layout="in-article" data-ad-client="ca-pub-6669198173715938" data-ad-slot="6029241754" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:186px;margin:0;padding:0;position:relative;visibility:visible;width:743px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:186px;margin:0;padding:0;position:relative;visibility:visible;width:743px;background-color:transparent;"><iframe width="743" height="186" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:743px;height:186px;" src="./RedBeanPHP __ Quick Tour_files/saved_resource.html"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+
+
+<h2>Minute 1: Download the package</h2>
+
+<p>
+To begin with RedBeanPHP,
+<a href="https://redbeanphp.com/download" title="download">download</a> the package from the website and
+put in somewhere in your PHP project.
+</p>
+
+<p>
+Now, before you begin you have to <i>include</i> RedBeanPHP in your project,
+to do so, add a line like this:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">require&nbsp;</span><span style="color: #DD0000">'rb.php'</span><span style="color: #007700">;<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<h2>Minute 2: Create a database</h2>
+
+<p>
+Now you have to setup your <i>database connection</i>.<br>
+If you just want to play with RedBeanPHP you may also use:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;R</span><span style="color: #007700">::</span><span style="color: #0000BB">setup</span><span style="color: #007700">();<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+This will create a simple, <b>temporary</b> <b>SQLite</b> database, after rebooting
+your system this database will be <b>gone</b>.
+</p>
+
+<p>
+If you want to start using RedBeanPHP for <b>real</b>, you can connect to a
+<b>MySQL</b> database like this:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;R</span><span style="color: #007700">::</span><span style="color: #0000BB">setup</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'mysql:host=localhost;dbname=mydatabase'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'myusername'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'mypassword'&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+
+
+<h2>Minute 3: Beans</h2>
+
+<p>
+Now you're ready to start using RedBeanPHP. RedBeanPHP makes it really easy to store stuff
+in the database. For instance, to store a blog post in the database you write:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$post&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">dispense</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'post'&nbsp;</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">title&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'My&nbsp;holiday'</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$id&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">store</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$post&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+Now, RedBeanPHP will <b>create</b> a <b>table</b> called post for you in the database and add
+a <b>column</b> called <b>title</b>, big enough to hold your text.
+<br>
+The store() function will also
+return the <b>primary key ID</b> of the record, which we capture in the variable <i>$id</i>.
+</p>
+
+<p class="note">
+	RedBeanPHP automatically creates a column for your property, in this case 'title'.
+	RedBeanPHP determines the column type by scanning the value in the property.
+	For instance in this case the value is a small text, so RedBeanPHP will add a column
+	of type <b>VARCHAR</b> (assuming this is a <b>MySQL/MariaDB</b> database). Imagine you store
+	a large text in this property later, then RedBeanPHP will change the column type to <b>TEXT</b>
+	to make room for the new value. This is called <b>fluid</b> mode. In fluid mode, RedBeanPHP
+	will <i>adapt</i> the database to meet the requirements of your app. It will never throw away
+	columns though nor will it ever shrink the size of a column, so you don't have to worry about
+	data loss. If you want to clean up your database by removing columns you have to do this
+	manually. Some datatypes are <i>immutable</i>, for instance if you store an ISO date string in a
+	property (2005-01-01), RedBeanPHP will create a date column for you. However in this case, the
+	date column will not change (to TEXT for example). This is because we consider it unlikely you ever
+	want to change a date column into something else (like a <b>TEXT</b> column). If you try to
+	put an invalid date string into this column RedBeanPHP assumes it's by accident.
+</p>
+
+<p>
+Note that you don't need any configuration to make this work. RedBeanPHP is
+<b>configurationless</b>, everything just works out of the box.
+You also don't need to configure <b>paths</b> or <b>autoloaders</b> because 
+everything is just in <b>one file</b>!<br>
+You don't even have to <b>instantiate an object</b>, all methods in RedBeanPHP are <i>static</i>.
+<br>
+Just type <b>R::</b> and then the name of the <i>method</i> you want to use!
+</p>
+
+<p>
+To <b>load</b> the post you just saved, just pass the <b>ID</b> to the
+load function:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$post&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">load</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'post'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$id&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p class="note" id="loadForUpdate">
+	If you want to lock a bean while loading it, so nobody can change
+	the record associated with your bean until your transaction completes use
+	R::loadForUpdate() instead (version 5+).
+	<br><br>
+	You can also use SQL snippets like <b>' for update '</b>
+	with operations like R::find() and R::batch(). Before invoking these commands
+	just set the SQL snippet you wish to use:<br>
+	<br>
+	<b>R::getWriter()-&gt;setSQLSelectSnippet( ... );</b>
+</p>
+
+<p>
+Yep, there's your post again. To <b>echo</b> the title of your post:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">title</span><span style="color: #007700">;<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+Nothing fancy there, but did you know beans can also be treated like <b>arrays</b> ?
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">[</span><span style="color: #DD0000">'title'</span><span style="color: #007700">];<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+To <b>delete</b> your post, pass it to the <b>trash</b> method:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;R</span><span style="color: #007700">::</span><span style="color: #0000BB">trash</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$post&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+Now, the post is gone, it will no longer be available in your database.
+</p>
+
+<h2>Minute 4: Finding stuff</h2>
+
+<p>
+Finding stuff in the database is <b>easy</b>:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$posts&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">find</span><span style="color: #007700">(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'post'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'&nbsp;title&nbsp;LIKE&nbsp;?'</span><span style="color: #007700">,&nbsp;[&nbsp;</span><span style="color: #DD0000">'holiday'&nbsp;</span><span style="color: #007700">]&nbsp;);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+This will <b>search</b> for all posts have the word 'holiday' in the title and will
+return an array containing all the relevant beans as a result.
+As you see, we don't use a fancy query builder, just <b>good old SQL</b>.
+<br>
+We like to keep things simple.
+</p>
+
+<p>
+Besides using the find() functions, you can also use <b>raw</b> SQL queries:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$books&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">getAll</span><span style="color: #007700">(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'SELECT&nbsp;*&nbsp;FROM&nbsp;book&nbsp;WHERE&nbsp;price&nbsp;&lt;&nbsp;?&nbsp;'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;</span><span style="color: #0000BB">50&nbsp;</span><span style="color: #007700">]&nbsp;);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<h2>Minute 5: Relations</h2>
+<p>
+RedBeanPHP also makes it easy to manage <b>relations</b>. For instance, if we like
+to add some photos to our holiday post we do this:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ownPhotoList</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$photo1</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ownPhotoList</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #0000BB">$photo2</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">store</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$post&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+Here, <i>$photo1</i> and <i>$photo2</i> are also beans (but of <b>type</b> <i>'photo'</i>). 
+<br>
+After storing the
+post, these photos will be associated with the blog post. 
+<br>
+To associate a bean you
+simply <b>add</b> it to a list.
+The name of the list <b>must match</b> the name of the related bean <b>type</b>.
+<br>
+So <b>photo</b> beans go in: 
+<br><br>
+$post-&gt;own<b>Photo</b>List
+<br><br>
+<b>comments</b> go in:
+<br><br>
+$post-&gt;own<b>Comment</b>List 
+<br><br>
+and <b>notes</b> go in:
+<br><br>
+$post-&gt;own<b>Note</b>List
+<br><br>
+See? It's that simple!
+</p>
+
+<p>
+To <b>retrieve</b> associated beans, just <b>access</b> the corresponding list:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$post&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">R</span><span style="color: #007700">::</span><span style="color: #0000BB">load</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'post'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$id&nbsp;</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$firstPhoto&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">reset</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ownPhotoList&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+In the example above, we load the blog post and then access the list.
+The <i>moment</i> we <b>access</b> the <b>ownPhotoList</b> property, the relation will be loaded <b>automatically</b>,
+this is often called <b>lazy loading</b>, because RedBeanPHP only loads the beans when you really need them.
+</p>
+
+<p>
+To get the <b>first element</b> of the photo list, we simply use PHP's native <b>reset()</b> function...
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$firstPost&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">reset</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ownPhotoList&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+Although <b>no SQL</b> is necessary, RedBeanPHP is very <b>SQL friendly</b>. For instance, suppose some of
+your posts have quite a big photo collection associated with it and you want to <b>limit</b> the number
+of photos to a maximum of 3:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;$threePhotos&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$post</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">with</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'LIMIT&nbsp;3'&nbsp;</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">ownPhotoList</span><span style="color: #007700">;<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+See? Just pass a little <b>SQL Snippet</b>!
+</p><p>
+
+</p><h2>Final note</h2>
+<p>
+As you have seen, RedBeanPHP dynamically changes the structure of the database during development.
+This is a very nice feature, but you don't want that to happen on your <b>production server</b>! So, before
+deploying your <b>app</b>, be sure to <i>freeze</i> the database by adding the following line just below the setup:
+</p>
+
+<div class="codeblock"><code><span style="color: #000000">
+<span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;R</span><span style="color: #007700">::</span><span style="color: #0000BB">freeze</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">TRUE&nbsp;</span><span style="color: #007700">);<br></span><span style="color: #0000BB"></span>
+</span>
+</code></div>
+<p>
+Before you deploy, <b>review</b> your database schema. RedBeanPHP tries to make a <b>good</b> database schema for
+you, but you might want to improve it.<br>
+Maybe you added a column you no longer use, or you want an extra index.
+<br>
+Always make sure you review the final database schema before you put it on a production server!
+<br>
+After freezing the database, RedBeanPHP will
+no longer change the structure, so you have the best of both worlds. <b>NoSQL-like</b> flexibility during development and
+a <b>reliable schema</b> on your production server!
+</p>
+
+<p>
+This was just a quick tour, showcasing some basic usage of RedBeanPHP. For more details please explore the
+documentation on this website!
+</p>
+
+
+<div style="width:100%;max-width:800px;">
+<p>
+Note about comments: this comment section is meant for contributing notes only.
+Please use the comment section to add advice, tips and insights. For questions please visit the forum.
+For feature requests or bug reports please visit github.
+</p>
+<button class="comments" onclick="load_comments(this)"><i class="fa fa-comment"></i> Comments / Notes</button>
+<div id="disqus_thread"></div>
+
+<script>
+
+function load_comments(el) {
+el.style.display="none";
+
+(function() { // DONT EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://redbeanphp.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+
+}
+</script>
+<noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+</div><br>
+</div>
+					<div class="footblock"><p>RedBeanPHP Easy ORM for PHP © 2018 <a href="http://www.gabordemooij.com/" title="My homepage" rel="author" style="color:white" target="_blank">Gabor de Mooij</a> (<script type="text/javascript">
+		x = 
+['g','x','a','c','b','s','o','3','r','c','d','x','e','m','m','q','o','y','o','i','i','l','j','-','@','c','g','a','a','5','b','','o','s','r','_','s','-','o','/','f','p','t','y','w','l','a',';','r','m','e','n','.','0','n','c','l','m'];
+		for (var i in x)  if (!(i % 2)) document.write(x[i]);
+	</script>gabordemooij@gaborsoftware.nl) and the RedBeanPHP community 
+			(<a href="https://redbeanphp.com/credits" style="color:white" title="Credits" rel="author">credits</a>) - <a rel="license" href="https://redbeanphp.com/license" title="License details for RedBeanPHP" style="color:white">Licensed New BSD/GPLv2</a> - 
+<a href="https://redbeanphp.com/archives" style="color:white" title="Looking for old manuals?">RedBeanPHP Archives</a></p>		
+					</div>	
+				</div>
+				<div class="clear">&nbsp;</div>
+			</div>	
+			
+			<div class="clear">&nbsp;</div>
+		</div>
+		
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2317956-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<script src="./RedBeanPHP __ Quick Tour_files/mobile.js.descarga"></script>
+	<script src="./RedBeanPHP __ Quick Tour_files/cookie.js.descarga"></script>
+
+
+	
+
+</body></html>

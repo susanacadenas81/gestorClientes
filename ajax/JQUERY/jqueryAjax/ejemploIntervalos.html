@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="texto"></div>
+<button id="arrancar" onclick="arrancar()">ARRANCAR TIMER</button>
+<button id="parar" onclick="parar()">PARAR TIMER</button>
+<script type="text/javascript">
+	var timer;
+	function mostrarDatos(){
+		document.getElementById("texto").innerHTML = "ahora son las: "+new Date().toLocaleTimeString();
+	}
+	function arrancar(){
+		timer = setInterval(mostrarDatos,1000);
+	}
+	function parar(){
+		clearInterval(timer);
+	}
+
+</script>
+</body>
+</html>

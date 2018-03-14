@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+<meta charset="utf-8">
+</head>
+<body>
+
+<div id="texto"></div>
+
+<div id="miTemplate" style="visibility: hidden;">
+	<p><b>Aplicación de tirada de dados</b></p>
+	<div> El resultado del dado es: <span style="font-size: 40px"> {{ resultado }}</span></div>
+</div>
+
+<script src="jquery.js"></script>
+<script src="underscore.js"></script>
+<script type="text/javascript">
+	_.templateSettings = {
+  	interpolate: /\{\{(.+?)\}\}/g
+	};
+	var contenidoTemplate = $("#miTemplate").html();
+	var template = _.template(contenidoTemplate);
+	var resultadoTemplate = template({resultado : _.random(1,6)});
+	$("#texto").html(resultadoTemplate);
+</script>
+</body>
+</html>

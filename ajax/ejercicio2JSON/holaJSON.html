@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejemplo JSON</title>
+</head>
+<body>
+
+<script>
+	
+
+	var texto='[{"nombre": "ANA" },{"nombre":"JUAN"}]'
+	console.log("voy a transformar el texto: "+texto);
+	var usuarios = JSON.parse(texto);
+	console.log("voy a comprobar que del texto he obtenido un array de objetos de JS: ");
+	for(us of usuarios){
+
+		console.log(us.nombre);
+
+	}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+AJAX ES PROCESO DE LA COMUNICACIÓN DE JAVASCRIPT CON EL SERVIDOR
+,
+INTERCAMBIANDO INFORMACIONES EN 
++TEXTO PLANO
++XML
++JSON
+
+Para llevar a cabo una comunicación por AJAX con JS hay que realizar 
+los siguientes pasos:
+
+1-crear un objeto de la clase XMLHttpRequest
+var xhttp = new HTMLHttpRequest();
+
+2- a dicho objeto le asignamos una función cuando haya un cambio de estado 
+en la comunicación, el estado al que siempre haremos referencia es el 4, el cual indica que la
+comunicación ha finalizado y hay una respuesta lista para ser tratada.
+
+xhttp.onreadystatechange = function(){
+	
+
+	if(this.readyState == 4 && this.status = 200){
+	//procesar la respuesta
+	}
+
+
+};
+
+
+listado de estados:
+0=>petición aún no ha iniciado
+1=>conexión con el servidor se ha establecido
+2=>el servidor ha recibido la petición
+3=>el servidor está procesando la petición 
+4=> el servidor ha respondido y la petición se considera finalizada 
+
+tenemos una variable llamado status que nos indica usando el listado de códigos 
+estándar de http información adicional:
+200:"OK"
+403:"Forbidden"
+404:"Not found"
+
+
+3-Indicar el tipo de comunicación que vamos a lanzar y hacia donde hacerla:
+xhttp.open("GET","servidor.php",true);
+
+tipos de peticiones:
+GET=> se deben usar para pedir información al servidor
+	p.ej. pedir al servidor que nos devuelva un listado de viajes
+
+POST=>se debe usar para enviar información al servidor
+	p.ej. mandar al servidor un viaje para que lo registre
+
+//un poco desfasadas las siguientes
+PUT=>se deberia usar para indicar al servidor que modifique alguna información
+	p.eje. -> mandar al servidor un nuevo titulo para el viaje de un id concreto
+
+DELETE=>para indicar al servidor que debe borrar algo
+	p.eje._>mandar al serivdor el id de un registro para que lo borre
+
+
+El segundo parámetro de la función open es para indicar el archivo o ruta del 
+servidorcon el que llevaremos a cabo la comunicación.
+el tercer parámetro es para indicar si queremos que la comunicación sea síncrona 
+o asíncrona.
+-false indica síncrona y a dia de hoy ninguna comunicación por ajax debe ser 
+síncrona.Una comunicación síncrona hace que nuestra aplicación espere a que la 
+comunicación haya finalizado.
+-true indica una comunicación asíncrona.una vez  lanzada la comunicación con el 
+servidor, nuestra aplicación continua su ejecución, y cuando la comunicación 
+finalice y tengamos una respuesta del ervidor su procesamiento será atendida
+en una funcion.
+
+4-lanzar la petición :
+xhttp.send();

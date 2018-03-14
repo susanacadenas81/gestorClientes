@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="contenedor"></div>
+<button>Hacer mas grande</button>
+<a href="#" id="ocultar">Ocultar texto</a>
+<a href="#" id="mostrar">Mostrar texto</a>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+	$("#contenedor").html("hola desde jquery");
+	$("#contenedor").click(function(){
+		$(this).html("me has hecho click");
+		alert("contenido html del div: "+$("#contenedor").html())
+	}); //end click
+	var fuente=20;
+	$("button").click(function(){
+		$("#contenedor").css("fontSize",fuente+"px");//fontSize+=15 incrementa en 15
+		fuente+=20;
+	})
+	$("#ocultar").click(function(){$("#contenedor").fadeOut();})
+	$("#mostrar").click(function(){$("#contenedor").fadeIn();})
+
+</script>
+</body>
+</html>

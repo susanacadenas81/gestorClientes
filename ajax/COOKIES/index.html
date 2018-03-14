@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+Insertar nueva cookie: <br/>
+nombre cookie: <input type="text" id="nombreCookie"/><br/>
+valor de la cookie: <input type="text" id="valorCookie"/><br/>
+<button id="botonGuardar">GUARDAR COOKIE</button><br/>
+<button id="botonServidor">COMUNICARME CON EL SERVER</button>
+listado de cookies<br/>
+<div id="listaCookies"></div>
+<div id="infoCookieLogin" style="color:red"></div>
+
+<script src="jquery.js"></script>
+<script src="jscookie.js"></script>
+<script>
+	
+	$("#botonGuardar").click(function(){
+		Cookies.set($("#nombreCookie").val(), 
+			$("#valorCookie").val(),
+			{ expires:7 });//fin cookie set
+		listarCookies();
+	});//end click
+
+function listarCookies(){
+	var cookie = Cookies.get();
+	$("#listaCookies").html("");
+	for(c in cookie){
+		$("#listaCookies").append("<div>"+c+" : "+cookie[c]+"</div>");
+	}
+	var valorCookieLogin = Cookies.get('pepe');
+	if(valorCookieLogin==undefined){
+		$("#infoCookieLogin").html("usuario no identificado");
+	}
+	else{
+		$("#infoCookieLogin").html("usuario identificado");
+	}
+	//Cookies.get('nombre que sea') => si existe lo devuelve si no undefined
+}
+
+$("#botonServidor").click(function(){
+
+	$.get("servidor.php",function(res){
+		alert("respuesta: "+res);
+	})
+
+});
+
+listarCookies();
+
+</script>
+</body>
+</html>

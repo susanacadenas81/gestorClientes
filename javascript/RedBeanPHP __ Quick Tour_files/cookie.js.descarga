@@ -1,0 +1,154 @@
+/**
+ * Cookie warning script - to comply with EU cookie law. A modified version of
+ * Scott Herbert and Dimitri Kourkoulis’s original.
+ * @link https://github.com/cjbarnes/cookie-bar
+ * @author cJ barnes http://www.cjbarnes.co.uk
+ * @license LGPL 3.0
+ */
+
+(function cookieBar() {
+
+  /**
+   * Vanilla JavaScript version of jQuery.ready, with IE8+ support.
+   * @link http://youmightnotneedjquery.com/#ready
+   * @param {Function} fn The function to call on DOM ready.
+   */
+  function ready(fn) {
+    if (document.readyState != 'loading'){
+      fn();
+    } else if (document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      document.attachEvent('onreadystatechange', function(e) {
+        if (document.readyState != 'loading')
+          fn();
+      });
+    }
+  }
+
+  /**
+   * Vanilla JavaScript version of jQuery.on, with IE8+ support.
+   * Abstracts around IE.old's missing `addEventListener` support.
+   * @link http://youmightnotneedjquery.com/#on
+   * @param {Element}  el        Element the event listener will attach to.
+   * @param {String}   eventName Name of event to listen for.
+   * @param {Function} handler   Function to call when event occurs.
+   */
+  function addEventListener(el, eventName, handler) {
+    if (el.addEventListener) {
+      el.addEventListener(eventName, handler);
+    } else {
+      el.attachEvent('on' + eventName, function(e){
+        handler.call(el, e);
+      });
+    }
+  }
+
+  /**
+   * Get the currently set cookie with a specified name.
+   * @param  {String} c_name The cookie name to check for
+   * @return {String}        The named cookie’s contents
+   */
+  function getCookie(c_name) {
+    var i, x, y, ARRcookies = document.cookie.split(";");
+
+    for (i = 0; i < ARRcookies.length; i++) {
+
+      x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+      y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+      x = x.replace(/^\s+|\s+$/g, "");
+
+      if (x == c_name) {
+        return unescape(y);
+      }
+
+    }
+
+  }
+
+  /**
+   * Show the cookie message bar to the user.
+   */
+  function display() {
+
+    // Prep the cookie bar HTML.
+    var html = '';
+    html += '\t<p class="cookie-bar-description"><img alt="" style="opacity:0.6;width:20px" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjAwJyBoZWlnaHQ9JzIwMCcgZmlsbD0iIzAwMDAwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik00OS42NjYsOTIuNDM1Yy0yMi42NTYsMC00MS4wOTEtMTguNDMtNDEuMDkxLTQxLjA4NmMwLTIyLjY0OCwxOC40MzUtNDEuMDgyLDQxLjA5MS00MS4wODggICBjMS41OTQsMCwzLjI3NCwwLjExOSw1LjI4MywwLjM3M2wzLjA4NSwwLjM5MWwtMC40NSwzLjA3OGMtMC4wODcsMC41ODYtMC4xNTcsMC45OTQtMC4xNTcsMS40MjJjMCw1LjI3LDQuMjg4LDkuNTU3LDkuNTU4LDkuNTU3ICAgYzAuODc5LDAsMS44MTktMC4xNjQsMi44NzktMC41MDRsMy4xNDQtMS4wMTJsMC43NTYsMy4yMTdjMC42MTksMi42MjksMi4zNjUsNC44NzksNC43OTUsNi4xODJsMS44NDUsMC45ODhsLTAuMzA5LDIuNDU3ICAgYy0wLjAzNCwwLjI2LTAuMDgsMC41MTYtMC4wOCwwLjc3OWMwLDQuNzExLDMuMzk0LDguNjYsOC4wNzEsOS4zOThsMi40NTksMC4zOTFsMC4xNDgsMy4wNTNjMC4wMjksMC40MzgsMC4wNTgsMC44NzMsMC4wNTgsMS4zMTggICBDOTAuNzUsNzQuMDA1LDcyLjMxOSw5Mi40MzUsNDkuNjY2LDkyLjQzNXogTTQ5LjY2NiwxNi4zNjJjLTE5LjI5MywwLjAwNC0zNC45ODksMTUuNjk5LTM0Ljk4OSwzNC45ODYgICBjMCwxOS4yOTEsMTUuNjk0LDM0Ljk4NiwzNC45ODksMzQuOTg2YzE5LjA2OSwwLDM0LjYyNC0xNS4zMzYsMzQuOTc5LTM0LjMyYy02LjMyOS0yLjA3NC0xMC43MDYtNy45MzItMTAuNzMxLTE0Ljc3MyAgIGMtMi4yMTktMS41OTQtMy45NzctMy43MjktNS4xMDEtNi4xODZjLTAuNjE4LDAuMDg0LTEuMjI2LDAuMTI3LTEuODI4LDAuMTI3Yy04LjMzNiwwLTE1LjE3LTYuNTQ5LTE1LjYzMS0xNC43NyAgIEM1MC43NjIsMTYuMzc4LDUwLjIwNSwxNi4zNjIsNDkuNjY2LDE2LjM2MnoiLz48L2c+PGc+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTUxLjEzLDY2LjYwMWMxLjg2NywyLjY2LDQuNDIsNC42OTUsNy40NzgsNS44MDVjMS4wODIsMC4zOTUsMi43MzktMC4wMTYsMy40Ny0wLjkyICAgYzEuNTEtMS44NSwyLjc2Ni0zLjc1NCwzLjAxNC02LjE4NmMwLjIyOS0yLjI2LTEuMTIxLTQuNDU3LTMuMTIzLTUuNDU5Yy0xLjI3LTAuNjMxLTIuNTY2LTAuODM2LTMuOTcxLTAuOTUzICAgYy0xLjQ1NC0wLjEyMS0yLjQ4MywwLjMzOC0zLjYwMSwxLjIyN2MtMC45MDQsMC43MjUtMS44MDgsMS40NDEtMi43MTIsMi4xNjhjLTEuNTIxLDEuMjIxLTEuMjYzLDMuNzgzLDAsNS4wNDMgICBjMS40ODYsMS40OSwzLjUyNywxLjIxNSw1LjA0MywwYzAuOTk2LTAuNzg3LDEuOTc4LTEuNTg0LDIuOTcxLTIuMzc5Yy0wLjg0LDAuMzU0LTEuNjgxLDAuNjk3LTIuNTIxLDEuMDQ3ICAgYzAuNDAxLDAuMDA2LDAuNzk5LDAuMDIxLDEuMjAxLDAuMDU1Yy0wLjY5NC0wLjA1NSwwLjQ0MiwwLjE2MiwwLjU5NiwwLjIwN2MtMC44ODktMC4yOTMsMC4yNDQsMC4zODMtMC41NTUtMC4zMDcgICBjMC4yNTMsMC4yNzksMC4xODksMC4xODktMC4xODktMC4yNWMtMC4yMDYtMC41NTktMC4yNjEtMC42NTgtMC4xNi0wLjI5OWMtMC4yNDYtMC45ODYtMC4xODUsMC4xMTctMC4wMjUtMC44MiAgIGMtMC4wMzYsMC4yMTctMC40NTQsMS4xNzgtMC4wODQsMC4zODNjLTAuMTI4LDAuMjc1LTAuMjkyLDAuNTMxLTAuNDUsMC43OTljLTAuMTE2LDAuMTg4LTAuMjQ0LDAuMzY5LTAuMzY5LDAuNTUxICAgYzAuMjA1LTAuMjUyLDAuMTczLTAuMjA5LTAuMTA1LDAuMTMzYzEuMTU3LTAuMzA5LDIuMzA5LTAuNjEzLDMuNDY2LTAuOTE2Yy0wLjk3My0wLjM1NCwwLjYxNCwwLjMyOC0wLjQwMS0wLjIwMSAgIGMtMC40NjQtMC4yMzgtMC44OTQtMC41MzktMS4zMTUtMC44MzZjMC4xODEsMC4xNTIsMC4xMDQsMC4wODItMC4yMzctMC4yMDFjLTAuMjAxLTAuMTc0LTAuMzk2LTAuMzU0LTAuNTk0LTAuNTUxICAgYy0wLjEyMS0wLjExMy0wLjkxOC0xLjA4Ni0wLjY2NC0wLjczMmMtMS4xMjEtMS41OTItMy4wOTktMi4zMjYtNC44ODItMS4yODFDNTAuODM1LDYyLjY0Nyw1MC4wMDQsNjUuMDA5LDUxLjEzLDY2LjYwMXoiLz48L2c+PGc+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTYwLjgxNCw0Mi41NzljMi4yNTIsMS43NjIsMy43MDYsNC4xNDMsNS4zODcsNi40MTJjMS42MjMtMS42MjUsMy4yNTEtMy4yNTgsNC44NzQtNC44NzcgICBjLTIuMTk0LTEuNTUzLTQuNzYzLTEuODYzLTcuMTMtMi45NzNjMC41NDgsMS4zNDIsMS4wOTQsMi42ODIsMS42NDQsNC4wMmMwLjM5My0xLjM4MSwwLjc4OC0yLjc2NiwxLjE4My00LjE1OCAgIGMxLjI3LTQuNDMtNS42MTQtNi4zMTItNi44NzctMS44OTZjLTAuMzk3LDEuMzg3LTAuNzkyLDIuNzc1LTEuMTg5LDQuMTY2Yy0wLjQwNCwxLjQyOCwwLjIyMiwzLjM1NSwxLjY0LDQuMDIxICAgYzIuMzQ3LDEuMTAyLDUuMDA1LDEuNDY5LDcuMTM3LDIuOTczYzIuODUyLDIuMDEsNi45OTMtMi4wMjcsNC44NzMtNC44NzljLTIuMDA1LTIuNzE1LTMuNzk4LTUuNzQ2LTYuNDk0LTcuODU1ICAgYy0xLjUyOS0xLjE5NS0zLjU1LTEuNDk4LTUuMDQxLDBDNTkuNTY4LDM4Ljc4NCw1OS4yNzYsNDEuMzc2LDYwLjgxNCw0Mi41Nzl6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik0zNi4zNDYsNjguMTI0YzAsMC42NTQtMC4wMDcsMS4zMDctMC4wNDYsMS45NjNjLTAuMDM4LDAuNDM5LTAuMDM4LDAuNDU1LTAuMDAyLDAuMDM3ICAgYy0wLjAyMiwwLjExMS0wLjM3LDEuMDM5LTAuMDYsMC4zNjdjMS4wMjUtMC41OTQsMi4wNTMtMS4xOCwzLjA4My0xLjc3MWMtMC4yOTMtMC4wMDQtMC41NzYtMC4wMTQtMC44Ny0wLjAzNyAgIGMwLjk4MSwwLjA3OC0wLjAzMi0wLjA0OS0wLjI3MS0wLjEyMWMwLjg2NywwLjI2NiwwLjMyMSwwLjE0OCwwLjA2Mi0wLjAwNGMtMC4zMTEtMC4yMTMtMC4yMzMtMC4xNTgsMC4yMjksMC4xNzYgICBjLTAuMjUyLTAuMjcxLTAuMjAxLTAuMTg2LDAuMTQ4LDAuMjU0Yy0wLjEyNi0wLjE2OC0wLjIyNy0wLjM2My0wLjMyNy0wLjU1NWMwLjQ3MSwwLjkxMiwwLjAzNy0wLjAxNi0wLjAzOS0wLjI4OSAgIGMtMC4wMzYtMC4xOC0wLjA3Mi0wLjM1NC0wLjEtMC41MjdjMC4wNTksMC40NzEsMC4wNjUsMC40OTIsMC4wMjIsMC4wNjJjLTAuMDQzLTAuNDQzLTAuMDQzLTAuODkzLTAuMDQ4LTEuMzMyICAgYy0xLjUwNSwxLjE0Ni0zLjAxLDIuMjg5LTQuNTEyLDMuNDM4YzEuNzgxLDAuNTkyLDMuNTY0LDEuMTg5LDUuMzQ4LDEuNzgxYzEuODQ3LDAuNjE3LDMuODkzLTAuNjkzLDQuMzg2LTIuNDkgICBjMC41MzYtMS45NDUtMC42NDQtMy43Ny0yLjQ4OS00LjM4M2MtMS43OC0wLjU5Ni0zLjU2My0xLjE4OS01LjM0Ny0xLjc4NWMtMi4yMDgtMC43MzItNC41MzIsMS4yMDktNC41MTQsMy40MzkgICBjMC4wMjEsMi4xNDMsMC4yMzIsNC42NDMsMS41OTQsNi40MTJjMS42OTEsMi4xOTcsMy45ODMsMy4wNTcsNi43MjksMy4wOThjMS4xNTUsMC4wMTYsMi41NzUtMC42NywzLjA3My0xLjc3MSAgIGMwLjg5NS0xLjkzOCwxLjA4Mi0zLjg0MiwxLjA4Ni01Ljk1N0M0My40OCw2My41MjYsMzYuMzUxLDYzLjUyNiwzNi4zNDYsNjguMTI0eiIvPjwvZz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMzMuNjg4LDQ1LjU0NGMtMC4wODIsMC42MjEsMC45MTMtMS45OCwwLjY3OC0xLjMwOWMwLjI0Ny0wLjcwMywwLjMwOS0xLjQsMC40MDktMi4xMzUgICBjMC4yMTItMS42MDctMS4yNTktMi45ODQtMi42MTktMy40NDFjLTAuNzgtMC4yNi0xLjYwNy0wLjI4Ny0yLjM5MS0wLjU0NWMtMS40MzQtMC40NzktMy4zNDMsMC4yNzctNC4wMjUsMS42MzkgICBjLTIuMDA5LDMuOTktNS41OTEsMTAuMTU0LTMuMjE0LDE0LjcxMWMxLjg3MiwzLjU4NCw2LjQyLDIuNTE2LDkuMTgsMC44NjdjMi42MzEtMS41NjQsNS45ODItNC4zOTUsNC4yNzktNy43OTkgICBjLTIuMjkyLTQuNTg4LTkuMTA3LDAuMTcyLTExLjcxMywxLjczNGMxLjc4MywxLjAyNSwzLjU3NSwyLjA1Myw1LjM2MSwzLjA3OGMwLjAzOC0xLjE1OCwwLjQ4My0yLjIyNywwLjYyMS0zLjM5NSAgIGMwLjIyOC0xLjk1My0xLjU0OS0zLjgwMy0yLjY2NS01LjE1NGMwLjM1LDAuODM4LDAuNjk5LDEuNjgyLDEuMDQ2LDIuNTJjLTAuMDk2LDAuMjA5LTAuMTg4LDAuNDE2LTAuMjgzLDAuNjIxICAgYy0wLjcxMiwwLjU0NS0xLjQyLDEuMDg4LTIuMTMsMS42MzljLTAuNzIyLDAuMjk3LTAuMTc2LDAuMDE2LDAuMjUzLTAuMDAyYzAuOTM4LTAuMDQzLDEuNzA2LTAuMzI4LDIuNTMyLTAuNzY2ICAgYy0wLjkxOCwwLjEyMS0xLjgzMywwLjI0NC0yLjc0OSwwLjM2MWMwLjk3MywwLjI3MSwxLjk0MywwLjU0MywyLjkxOCwwLjgxNGM0LjQzNywxLjI0LDYuMzE3LTUuNjM5LDEuODkzLTYuODc3ICAgYy0wLjk3My0wLjI3MS0xLjk0NS0wLjU0My0yLjkxOC0wLjgxNGMtMC42MzItMC4xNzItMS4yNjMtMC4xNzItMS44OTUsMGMtMi43NzIsMC43NiwwLjkwNCwwLjE3NC0wLjQ2NiwwLjE2ICAgYy0xLjUxOS0wLjAyLTIuNzA2LDAuNjg5LTMuNTk3LDEuODc5Yy0wLjYzNCwwLjg1LTAuNzQxLDEuOTYzLTAuNjkzLDIuOTg0YzAuMDc1LDEuNTI1LDEuMDA0LDIuMzI2LDEuNzg3LDMuNTA0ICAgYy0wLjM5Ni0wLjYsMC4wOTctMi4xLTAuMzU0LTAuNzA5Yy0wLjMzOCwxLjAyNy0wLjQwMiwyLjE2OC0wLjQzOCwzLjIzNGMtMC4wODksMi43MDUsMy4wOTYsNC40NDcsNS4zNjEsMy4wODQgICBjMS40NjMtMC44NzEsMi45MjktMS43MzIsNC40NjYtMi40NjNjMC44NTUtMC40LTAuNTQ0LDAuMTQ1LDAuNTg5LTAuMjE3YzAuMzUtMC4xMTEsMS4wMDItMC4xMzctMC4zOTksMC4wMTggICBjLTEuNDAyLDAuMTQzLTMuMDgtMS42OC0zLjE2Ny0zLjM0NmMtMC4wMTktMC4zNjMsMC4zNDUtMS40MTQsMC4zODgtMS41MDZjLTAuMTM0LDAuMjY0LTAuNTUyLDAuNzI1LDAuMjk1LTAuMzQyICAgYy0wLjIxMiwwLjI2OC0wLjQ1NCwwLjUtMC43MDUsMC43MzJjLTAuMTEsMC4xMDItMC4yMjIsMC4xOTctMC4zMzgsMC4yOTFjLTAuNjY3LDAuNTYxLDAuNTgyLTAuNDM2LDAuMDk0LTAuMDY2ICAgYy0wLjM1OSwwLjI2Ni0wLjczOCwwLjUwOC0xLjEyNCwwLjc0NGMtMC4zMzMsMC4xOTMtMC42NzgsMC4zNjktMS4wMjksMC41MzFjMS4xODktMC41NDMtMC4wNDgtMC4wMi0wLjQyNywwLjA1NSAgIGMxLjE0OC0wLjIyOSwwLjc2NS0wLjA4MiwwLjQzNC0wLjA3Yy0wLjc2NSwwLjAyNSwwLjg3LDAuMTgsMC4zNzIsMC4wNDljMS4wMjcsMC4yNzcsMS4zNDcsMC44NDgsMS41ODIsMS41MzMgICBjLTAuMDk2LTAuMjc1LTAuMTA3LTAuODQ4LDAuMDE2LDAuMzM4Yy0wLjAyNy0wLjI2LTAuMDExLTAuNTE4LDAuMDA1LTAuNzczYzAuMDM3LTAuNTMzLTAuMTU1LDAuNzczLDAuMDY0LTAuMjczICAgYzAuMDg0LTAuNCwwLjE5My0wLjc5NywwLjMxNC0xLjE5NWMwLjYyNi0yLjEzMSwxLjYxNC00LjEzMywyLjYwNy02LjEwOWMtMS4zNDMsMC41NTEtMi42ODUsMS4wOTQtNC4wMjcsMS42MzkgICBjMC43ODMsMC4yNjIsMS42MDcsMC4yODUsMi4zODksMC41NDdjLTAuODczLTEuMTQ2LTEuNzQ3LTIuMjkzLTIuNjE3LTMuNDM5YzAuMDgyLTAuNjIxLTAuOTExLDEuOTgyLTAuNjczLDEuMzExICAgYy0wLjI0OSwwLjcwMy0wLjMxNSwxLjQtMC40MDksMi4xMzdjLTAuMjU0LDEuOTMsMS44MTcsMy41NjQsMy41NjQsMy41NjRDMzIuMjU5LDQ5LjExMiwzMy40MzMsNDcuNDcsMzMuNjg4LDQ1LjU0NHoiLz48L2c+PGc+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTQxLjc5Niw0NS45MzFjMS41OCwxLjUyMywzLjY0OCwyLjY4Miw1LjkxMSwyLjU4NmMyLjA1NS0wLjA5Miw0LjE4OS0xLjE2Miw1LjEzNy0zLjA2NCAgIGMxLjA4Ny0yLjE3NCwwLjY5LTQuNDg4LTAuOTM2LTYuMjdjLTEuNzAzLTEuODc1LTQuNjIxLTIuMjgzLTYuOTkzLTIuMzExYy0xLjUtMC4wMjEtMy4xMzUsMS4wOTItMy40NDMsMi42MTUgICBjLTAuMTk2LDAuOTktMC4zOTUsMS45OC0wLjU5NiwyLjk3MWMtMC4zNzksMS45MDYsMC41MjEsMy44NDQsMi40OTUsNC4zODljMS43NywwLjQ4Niw0LjAwMy0wLjU4Miw0LjM4Ni0yLjQ5MiAgIGMwLjE5Ny0wLjk5LDAuMzk3LTEuOTgsMC41OTctMi45NzNjLTEuMTUxLDAuODczLTIuMjkzLDEuNzQ4LTMuNDM4LDIuNjE1YzAuMzM4LDAuMDA2LDAuNjY0LDAuMDIsMS4wMDQsMC4wMzkgICBjMC40MywwLjA0NywwLjQwNywwLjAzNS0wLjA3LTAuMDIzYzAuMTc2LDAuMDI1LDAuMzUsMC4wNTksMC41MTksMC4xMDJjMC4yNDgsMC4wNTMsMS4yNzMsMC40MzQsMC4yMjQtMC4wMTIgICBjMC4yMjQsMC4wOTYsMC40MzYsMC4yMjksMC42MzksMC4zNjdjLTAuODQtMC41NzItMC40NzctMC4zNzctMC4yNjUtMC4xMzljLTAuMzk3LTAuNTU1LTAuNTA1LTAuNjg0LTAuMzI4LTAuMzg5ICAgYy0wLjI0Ny0wLjY2Mi0wLjMyMi0wLjgyOC0wLjIxMS0wLjVjMC4xNjcsMC41MDgtMC4wMzEtMS4xMDctMC4wNy0wLjM2MWMwLjEyOC0wLjc0NiwwLjE1LTAuOTQ5LDAuMDU1LTAuNjA1ICAgYy0wLjExMiwwLjMzLTAuMDM2LDAuMTU4LDAuMjI3LTAuNTJjLTAuMTM4LDAuMjY4LTAuNTA3LDAuNTc4LDAuMjczLTAuMzI2Yy0wLjUsMC41OCwwLjY3NC0wLjQ0NSwwLjIyMi0wLjE0OCAgIGMtMC42NjksMC40MzgsMC43NTMtMC4yNTIsMC4yMTktMC4wOGMtMC44MDgsMC4yNTYsMC44LTAuMDQ1LDAuMjAzLTAuMDE2Yy0wLjI5LDAuMDEyLTAuODc2LTAuMTE3LDAuMjg4LDAuMDY2ICAgYy0wLjI3MS0wLjA0Ny0xLjA4Mi0wLjM2MS0wLjAzNiwwLjA3OGMtMC4yNTktMC4xMTMtMC41MDMtMC4yNjItMC43NC0wLjQxNGMtMC4zMDYtMC4yMTktMC4yNTMtMC4xOCwwLjE1NSwwLjExNyAgIGMtMC4xMjgtMC4xMTMtMC4yNTYtMC4yMjktMC4zODQtMC4zNTJjLTEuMzk1LTEuMzQ4LTMuNjQ4LTEuMzk1LTUuMDQxLDBDNDAuNDM4LDQyLjI0Myw0MC4zOTgsNDQuNTgzLDQxLjc5Niw0NS45MzF6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik03Ni4wMTIsMTQuNzAyYzQuNjAxLDAsNC42MDEtNy4xMzcsMC03LjEzN0M3MS40MTMsNy41NjUsNzEuNDEzLDE0LjcwMiw3Ni4wMTIsMTQuNzAyTDc2LjAxMiwxNC43MDJ6Ii8+PC9nPjxnPjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik04NC4zMzQsMjQuOTk5YzQuNTk5LDAsNC41OTktNy4xMzEsMC03LjEzMUM3OS43MzMsMTcuODY4LDc5LjczMywyNC45OTksODQuMzM0LDI0Ljk5OUw4NC4zMzQsMjQuOTk5eiIvPjwvZz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNODkuNDg3LDQyLjQ1NmMyLjU4NCwwLDIuNTg0LTQuMDA0LDAtNC4wMDRDODYuOTAyLDM4LjQ1Miw4Ni45MDIsNDIuNDU2LDg5LjQ4Nyw0Mi40NTZMODkuNDg3LDQyLjQ1NnoiLz48L2c+PC9zdmc+"> ';
+
+html+='We use cookies to improve your experience on our websites. By continuing your visit, you accept our use of these cookies. </p>\n';
+    html += '\t<div class="cookie-bar-action">\n';
+    html += '\t\t<a class="cookie-bar-button" href="#">OK</a>&nbsp;&nbsp;\n';
+   // html += '\t\t<a class="cookie-bar-link" href="/about/terms">Find&nbsp;out&nbsp;more</a>\n';
+    html += '\t</div>\n';
+
+    // Create the cookie bar elements.
+    var element = document.createElement('div');
+    element.className = 'cookie-bar';
+    element.innerHTML = html;
+
+    var button = element.querySelector('.cookie-bar-button');
+    /**
+     * Click event for OK button - set a "user has agreed to cookies" cookie
+     * and hide the cookies warning.
+     * @param {Object} e Event object.
+     */
+    addEventListener(button, 'click', function cookieBarOk(e) {
+      if ('undefined' !== typeof e.preventDefault) {
+        e.preventDefault();
+      } else { // IE8 equivalent of preventDefault.
+        e.returnValue = false;
+      }
+
+      // Create the cookie
+      setCookie("jsCookieCheck", null, 365);
+
+      // Hide the cookie warning.
+      document.querySelector('.cookie-bar').style.display = 'none';
+
+    });
+
+    // Display.
+    document.body.insertBefore(element, document.body.firstChild);
+
+  }
+
+  /**
+   * Abstracted function to set a new cookie.
+   * @param {String} c_name Name of new cookie
+   * @param {String} value  Contents of new cookie
+   * @param {Number} exdays Number of days before cookie should expire
+   */
+  function setCookie(c_name, value, exdays) {
+
+      // Calculate expiration date
+      var exdate = new Date();
+      exdate.setDate(exdate.getDate() + exdays);
+
+      // Setup the full cookie contents
+      var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString() + "; path=/");
+
+      // Write the new cookie
+      document.cookie = c_name + "=" + c_value;
+
+  }
+
+  /**
+   * Initializing function. Checks for the presence of an agreement cookie and,
+   * if it doesn’t exist, displays the cookie notification.
+   */
+  function checkCookie() {
+      var cookieName = "jsCookieCheck";
+      var cookieChk = getCookie(cookieName);
+
+      // Display the notification if no cookie exists
+      if (null == cookieChk || "" === cookieChk) {
+        display();
+      }
+
+  }
+
+  // Begin on DOM ready
+  ready(checkCookie);
+
+})();
+
